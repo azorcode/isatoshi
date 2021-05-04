@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="bg-yellow-600">
+        <div class="container">
+            <div class="pl-4">
+                <p class="text-lg">iSATOSHI</p>
+            </div>
+            <div class="text-sm text-white">
+                <ul class="flex flex-wrap justify-center space-x-4">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Mempools</a></li>
+                    <li><a href="#">Fees</a></li>
+                    <li><a href="#">Calculator</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div container>
+        <h1>Bitcoin Mempool</h1>
+        <div id="mp"></div>
+    </div>
+    <!-- <div>
+        <h1>Authors</h1>
+        <ul id="authors"></ul>
+    </div> -->
+
+    <script>
+        fetch ('https://mempool.space/api/v1/fees/mempool-blocks')
+        .then(res =>{
+            return res.json();
+        })
+        .then(data => {
+           
+            
+            let memPool = document.getElementById('mp')
+             memPool.innerHTML = `
+             <p>Block : ${data[0].blockSize}</p>
+                <p>Size : ${data[0].blockVSize}</p>
+                <p>NTX : ${data[0].nTx}</p>
+             <p>Total Fees : ${data[0].totalFees}</p>
+             <p>Median Fees : ${data[0].medianFee}</p>
+             <p>Free Range : ${data[0].feeRange[0]}</p>
+             <br>
+             <p>Block : ${data[1].blockSize}</p>
+                <p>Size : ${data[1].blockVSize}</p>
+                <p>NTX : ${data[1].nTx}</p>
+             <p>Total Fees : ${data[1].totalFees}</p>
+             <p>Median Fees : ${data[1].medianFee}</p>
+             <p>Free Range : ${data[1].feeRange[0]}</p>
+             <br>
+             <p>Block : ${data[2].blockSize}</p>
+                <p>Size : ${data[2].blockVSize}</p>
+                <p>NTX : ${data[2].nTx}</p>
+             <p>Total Fees : ${data[2].totalFees}</p>
+             <p>Median Fees : ${data[2].medianFee}</p>
+             <p>Free Range : ${data[2].feeRange[0]}</p>
+             
+
+    
+          
+            
+
+            `
+            console.log(data);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+
+        let memPool = document.getElementById('mp')
+        memPool.innerHTML = `
+        <h1>${data}</h1>
+
+
+        `
+    
+        // // fetch ('https://api.github.com/users/edulazaro')
+        // fetch ('https://mempool.space/api/v1/fees/recommended')
+        // // fetch ('https://mempool.space/api/v1/fees/mempool-blocks')
+        //     .then(response =>{
+        //         return response.json();
+        //     })
+        //     .then(data => {
+        //         console.log(data);
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     })
+
+
+    </script>
+</body>
+</html>
